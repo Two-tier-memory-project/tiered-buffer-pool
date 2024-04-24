@@ -1,0 +1,9 @@
+[[TATPConfig]]
+name = "basic"
+threads = [4, 10]
+time = 20
+dram_size_mb = [128]
+remote_size_mb = [128, 256, 384, 512]
+subscriber_cnt = [10_000, 100_000, 1_000_000]
+repeat = 3
+sut = ["OneTree"]

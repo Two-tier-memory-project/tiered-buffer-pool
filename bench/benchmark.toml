@@ -1,0 +1,514 @@
+[[BasicConfig]]
+name = "fix_dram"
+threads = [8, 24]
+time = 20
+distribution = "Uniform"
+record_cnt = 20_000_000
+workload_mix = { read = 100, negative_read = 0, update = 0, scan = 0 }
+dram_size_mb = [128]
+remote_size_mb = [128, 256, 384, 512]
+
+[[BasicConfig]]
+name = "fix_remote"
+threads = [8]
+time = 20
+distribution = "Uniform"
+record_cnt = 20_000_000
+workload_mix = { read = 100, negative_read = 0, update = 0, scan = 0 }
+dram_size_mb = [128, 256, 384, 512]
+remote_size_mb = [128]
+
+[[BasicConfig]]
+name = "dram_only"
+threads = [8]
+time = 20
+distribution = "Uniform"
+record_cnt = 20_000_000
+workload_mix = { read = 100, negative_read = 0, update = 0, scan = 0 }
+dram_size_mb = [640]
+remote_size_mb = [80]
+
+[[BasicConfig]]
+name = "dram_heavy"
+threads = [8]
+time = 20
+distribution = "Uniform"
+record_cnt = 20_000_000
+workload_mix = { read = 100, negative_read = 0, update = 0, scan = 0 }
+dram_size_mb = [480]
+remote_size_mb = [240]
+
+[[BasicConfig]]
+name = "balanceold"
+threads = [8]
+time = 20
+distribution = "Uniform"
+record_cnt = 20_000_000
+workload_mix = { read = 100, negative_read = 0, update = 0, scan = 0 }
+dram_size_mb = [320]
+remote_size_mb = [400]
+
+[[BasicConfig]]
+name = "remote_heavy"
+threads = [8]
+time = 20
+distribution = "Uniform"
+record_cnt = 20_000_000
+workload_mix = { read = 100, negative_read = 0, update = 0, scan = 0 }
+dram_size_mb = [160]
+remote_size_mb = [560]
+
+[[BasicConfig]]
+name = "remote_only"
+threads = [8]
+time = 20
+distribution = "Uniform"
+record_cnt = 20_000_000
+workload_mix = { read = 100, negative_read = 0, update = 0, scan = 0 }
+dram_size_mb = [60]
+remote_size_mb = [640]
+
+[[DBConfig]]
+name = "basic"
+threads = [10]
+time = 30
+distribution = ["Uniform"]
+record_cnt = 10_000_000
+workload_mix = { read = 100, negative_read = 0, update = 0, scan = 0 }
+dram_size_mb = [200, 300, 400, 500, 600, 700]
+remote_size_mb = [200, 300, 400, 500, 600, 700]
+sut = [
+	"OneTree",
+	"TwoTreeLower",
+	"TwoTreeUpper",
+	"TwoTreeUpperBlind",
+	"ThreeTree",
+]
+delay_nanos = [0]
+
+[[DBConfig]]
+name = "skew"
+threads = [10]
+time = 30
+distribution = [
+	{ Zipf = 0.6 },
+	{ Zipf = 0.8 },
+	{ Zipf = 1.0 },
+	{ Zipf = 1.2 },
+]
+record_cnt = 120_000_000
+workload_mix = { read = 80, negative_read = 0, update = 20, scan = 0 }
+dram_size_mb = [3000]
+remote_size_mb = [18000]
+sut = [
+	"OneTree",
+	"TwoTreeLower",
+	"TwoTreeUpper",
+	"TwoTreeUpperBlind",
+	"ThreeTree",
+]
+delay_nanos = [1000]
+repeat = 7
+promotion_rate = [1]
+
+[[DBConfig]]
+name = "balanced"
+threads = [10]
+time = 30
+distribution = [{ Zipf = 0.9 }]
+record_cnt = 120_000_000
+workload_mix = { read = 50, negative_read = 0, update = 50, scan = 0 }
+dram_size_mb = [3000]
+remote_size_mb = [18000]
+sut = [
+	"OneTree",
+	"TwoTreeLower",
+	"TwoTreeUpper",
+	"TwoTreeUpperBlind",
+	"ThreeTree",
+]
+delay_nanos = [1000]
+repeat = 7
+promotion_rate = [1]
+
+
+[[DBConfig]]
+name = "read-heavy"
+threads = [10]
+time = 30
+distribution = [{ Zipf = 0.9 }]
+record_cnt = 120_000_000
+workload_mix = { read = 80, negative_read = 0, update = 20, scan = 0 }
+dram_size_mb = [3000]
+remote_size_mb = [18000]
+sut = [
+	"OneTree",
+	"TwoTreeLower",
+	"TwoTreeUpper",
+	"TwoTreeUpperBlind",
+	"ThreeTree",
+]
+delay_nanos = [1000]
+repeat = 7
+promotion_rate = [1]
+
+
+[[DBConfig]]
+name = "read-only"
+threads = [10]
+time = 30
+distribution = [{ Zipf = 0.9 }]
+record_cnt = 120_000_000
+workload_mix = { read = 0, negative_read = 0, update = 100, scan = 0 }
+dram_size_mb = [3000]
+remote_size_mb = [18000]
+sut = [
+	"OneTree",
+	"TwoTreeLower",
+	"TwoTreeUpper",
+	"TwoTreeUpperBlind",
+	"ThreeTree",
+]
+delay_nanos = [1000]
+repeat = 7
+promotion_rate = [1]
+
+
+[[DBConfig]]
+name = "write-only"
+threads = [10]
+time = 30
+distribution = [{ Zipf = 0.9 }]
+record_cnt = 120_000_000
+workload_mix = { read = 0, negative_read = 0, update = 100, scan = 0 }
+dram_size_mb = [3000]
+remote_size_mb = [18000]
+sut = [
+	"OneTree",
+	"TwoTreeLower",
+	"TwoTreeUpper",
+	"TwoTreeUpperBlind",
+	"ThreeTree",
+]
+delay_nanos = [1000]
+repeat = 7
+promotion_rate = [1]
+
+[[DBConfig]]
+name = "write-heavy"
+threads = [10]
+time = 30
+distribution = [{ Zipf = 0.9 }]
+record_cnt = 120_000_000
+workload_mix = { read = 20, negative_read = 0, update = 80, scan = 0 }
+dram_size_mb = [3000]
+remote_size_mb = [18000]
+sut = [
+	"OneTree",
+	"TwoTreeLower",
+	"TwoTreeUpper",
+	"TwoTreeUpperBlind",
+	"ThreeTree",
+]
+delay_nanos = [1000]
+repeat = 7
+promotion_rate = [1]
+
+[[DBConfig]]
+name = "size"
+threads = [10]
+time = 30
+distribution = [{ SelfSimilar = 0.2 }]
+record_cnt = 30_000_000
+workload_mix = { read = 100, negative_read = 0, update = 0, scan = 0 }
+dram_size_mb = [200]
+remote_size_mb = [200, 400, 600, 800, 1000, 1200]
+sut = [
+	"OneTree",
+	"TwoTreeLower",
+	"TwoTreeUpper",
+	"TwoTreeUpperBlind",
+	"ThreeTree",
+]
+delay_nanos = [500]
+
+[[DBConfig]]
+name = "hotspot"
+threads = [10]
+time = 30
+distribution = [
+	{ HotSpot = 0.01 },
+	{ HotSpot = 0.05 },
+	{ HotSpot = 0.1 },
+	{ HotSpot = 0.2 },
+	{ HotSpot = 0.3 },
+	{ HotSpot = 0.4 },
+]
+record_cnt = 30_000_000
+workload_mix = { read = 100, negative_read = 0, update = 0, scan = 0 }
+dram_size_mb = [100]
+remote_size_mb = [300]
+sut = [
+	"OneTree",
+	"TwoTreeLower",
+	"TwoTreeUpper",
+	"TwoTreeUpperBlind",
+	"ThreeTree",
+]
+delay_nanos = [500]
+
+
+
+[[DBConfig]]
+name = "promotionpaper"
+threads = [10]
+time = 30
+distribution = [{ Zipf = 0.9 }]
+record_cnt = 120_000_000
+workload_mix = { read = 80, negative_read = 0, update = 20, scan = 0 }
+dram_size_mb = [3000]
+remote_size_mb = [18000]
+sut = [
+	"OneTree",
+	"TwoTreeLower",
+	"TwoTreeUpper",
+	"TwoTreeUpperBlind",
+	"ThreeTree",
+]
+delay_nanos = [1000]
+repeat = 7
+promotion_rate = [1, 5, 10, 20, 40, 80]
+
+[[DBConfig]]
+name = "lat"
+threads = [10]
+time = 60
+distribution = [{ Zipf = 0.9 }]
+record_cnt = 120_000_000
+workload_mix = { read = 80, negative_read = 0, update = 20, scan = 0 }
+dram_size_mb = [100, 2000, 3000]
+remote_size_mb = [6000, 12000, 14000, 18000]
+sut = [
+	"OneTree",
+	"TwoTreeLower",
+	"TwoTreeUpper",
+	"TwoTreeUpperBlind",
+	"ThreeTree",
+]
+delay_nanos = [
+	0,
+	100,
+	500,
+	1_000,
+	5_000,
+	10_000,
+	100_000,
+] # NUMA, CXL, RDMA, Optane SSD, Socket, PCIe 4.0 SSD
+repeat = 7
+promotion_rate = [1]
+
+
+[[DBConfig]]
+name = "promotion"
+threads = [10]
+time = 90
+distribution = [{ Zipf = 0.9 }]
+# distribution = ["Uniform"]
+record_cnt = 30_000_000
+workload_mix = { read = 80, negative_read = 0, update = 20, scan = 0 }
+dram_size_mb = [3000]
+remote_size_mb = [18000]
+sut = [
+	"OneTree",
+	"TwoTreeLower",
+	"TwoTreeUpper",
+	"TwoTreeUpperBlind",
+	"ThreeTree",
+]
+delay_nanos = [1_000]
+promotion_rate = [0, 5, 10, 20, 40, 80]
+
+[[DBConfig]]
+name = "evict_batch"
+threads = [10]
+time = 60
+distribution = [{ Zipf = 0.9 }]
+record_cnt = 30_000_000
+workload_mix = { read = 80, negative_read = 0, update = 20, scan = 0 }
+dram_size_mb = [3000]
+remote_size_mb = [18000]
+sut = ["ThreeTree"]
+delay_nanos = [1_000]
+promotion_rate = [5, 80]
+evict_batch = [1, 2, 4, 8, 16, 32]
+
+
+[[DBConfig]]
+name = "negative"
+threads = [10]
+time = 60
+distribution = [{ Zipf = 0.9 }]
+record_cnt = 120_000_000
+workload_mix = { read = 0, negative_read = 100, update = 0, scan = 0 }
+dram_size_mb = [2000, 3000]
+remote_size_mb = [12000, 18000]
+sut = [
+	"OneTree",
+	"TwoTreeLower",
+	"TwoTreeUpper",
+	"TwoTreeUpperBlind",
+	"ThreeTree",
+]
+delay_nanos = [1_000]
+
+
+[[DBConfig]]
+name = "negative_1"
+threads = [10]
+time = 60
+distribution = [{ Zipf = 0.9 }]
+record_cnt = 120_000_000
+workload_mix = { read = 20, negative_read = 80, update = 0, scan = 0 }
+dram_size_mb = [2000, 4000, 6000, 8000, 10000, 12000, 14000, 16000]
+remote_size_mb = [16000, 14000, 12000, 10000, 8000, 6000, 4000, 2000]
+sut = ["TwoTreeLower"]
+delay_nanos = [0]
+
+
+[[DBConfig]]
+name = "scan"
+threads = [10]
+time = 60
+dram_size_mb = [200, 300]
+remote_size_mb = [600, 1800]
+sut = [
+	"OneTree",
+	"TwoTreeLower",
+	"TwoTreeUpper",
+	"TwoTreeUpperBlind",
+	"ThreeTree",
+]
+delay_nanos = [1_000]
+distribution = ["Uniform"]
+record_cnt = 12_000_000
+workload_mix = { read = 0, negative_read = 0, update = 0, scan = 100 }
+repeat = 7
+promotion_rate = [1]
+
+[[DBConfig]]
+name = "dram_only"
+threads = [1]
+time = 30
+distribution = [{ Zipf = 0.9 }]
+record_cnt = 30_000_000
+workload_mix = { read = 100, negative_read = 0, update = 0, scan = 0 }
+dram_size_mb = [100, 300, 500, 700, 900, 1100, 1300, 1500, 1700, 1900, 2100]
+remote_size_mb = [0]
+sut = ["TwoTierOneTree", "TwoTreeUpper"]
+delay_nanos = [500]
+
+[[DBConfig]]
+name = "two_tier_cost_one_tree"
+threads = [10]
+time = 60
+distribution = [{ Zipf = 0.9 }]
+dram_size_mb = [
+	1000,
+	3000,
+	5000,
+	7000,
+	9000,
+	11000,
+	13000,
+	15000,
+	17000,
+	19000,
+	21000,
+	23000,
+	25000,
+	27000,
+]
+remote_size_mb = [0]
+sut = ["TwoTierOneTree"]
+delay_nanos = [1000]
+record_cnt = 120_000_000
+workload_mix = { read = 80, negative_read = 0, update = 20, scan = 0 }
+repeat = 7
+promotion_rate = [1]
+
+[[DBConfig]]
+name = "two_tier_cost_two_tree"
+threads = [10]
+time = 60
+distribution = [{ Zipf = 0.9 }]
+dram_size_mb = [
+	968,
+	2968,
+	4968,
+	6968,
+	8968,
+	10968,
+	12968,
+	14968,
+	16968,
+	18968,
+	20968,
+	22968,
+	24968,
+]
+remote_size_mb = [32]
+sut = ["TwoTreeLower"]
+delay_nanos = [1000]
+record_cnt = 120_000_000
+workload_mix = { read = 80, negative_read = 0, update = 20, scan = 0 }
+repeat = 7
+promotion_rate = [1]
+
+[[DBConfig]]
+name = "three_tier_cost"
+threads = [10]
+time = 60
+distribution = [{ Zipf = 0.9 }]
+record_cnt = 120_000_000
+workload_mix = { read = 80, negative_read = 0, update = 20, scan = 0 }
+dram_size_mb = [
+	32,
+	1000,
+	3000,
+	5000,
+	6000,
+	7000,
+	8000,
+	9000,
+	10000,
+	11000,
+	12000,
+	13000,
+	15000,
+	17000,
+	19000,
+	21000,
+	23000,
+	25000,
+]
+remote_size_mb = [
+	1000,
+	3000,
+	5000,
+	7000,
+	9000,
+	10000,
+	11000,
+	12000,
+	13000,
+	15000,
+	17000,
+	19000,
+	21000,
+	23000,
+	25000,
+]
+sut = ["ThreeTree"]
+delay_nanos = [500]
+repeat = 7
+promotion_rate = [1]
